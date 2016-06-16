@@ -37,6 +37,20 @@
 @section scripts
 {
 <script>
+    var appHub = $.connection.appHub;
+
+    appHub.client.userJoined = function (userName) {
+        console.log("User joined message from server.");
+        vm.userJoined(userName);
+    }
+
+    $.connection.hub.disconnected(function () {
+        setTimeout(function () {
+            $.connection.hub.start();
+        }, 5000);
+    });
+
+    $.connection.hub.start();
 
     var ChatChannelModel = function (firstUser, secondUser) {
         var self = this;
@@ -61,7 +75,8 @@
 
         self.joinApp = function () {
             // send message to server to join game
-            self.userJoined(self.newUserName());
+            //self.userJoined(self.newUserName());
+            appHub.server.join(self.newUserName());
         }
 
         self.userJoined = function (userName) {
@@ -93,7 +108,7 @@
     ko.applyBindings(vm);
 
     // testing
-    vm.otherUsers.push(new UserViewModel('Bob'));
-    vm.otherUsers.push(new UserViewModel('Jane'));
+    //vm.otherUsers.push(new UserViewModel('Bob'));
+    //vm.otherUsers.push(new UserViewModel('Jane'));
 </script>
 }

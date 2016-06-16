@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SimpleChat.Web.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,6 +17,13 @@ namespace SimpleChat.Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            MainActorSystem.Create();
+        }
+
+        void Application_End()
+        {
+            MainActorSystem.Shutdown();
         }
     }
 }

@@ -12,7 +12,7 @@ namespace SimpleChat.Web
     {
         public void Configuration(IAppBuilder app)
         {
-
+            app.MapSignalR();
         }
     }
 }
