@@ -1,3 +1,51 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+
+<div data-bind="visible: !isJoined()">
+    <h2>Join</h2>
+    <form data-bind="submit:joinChannel">
+        Username: <input data-bind="value:newUserName" required="" />
+        <button type="submit">Join</button>
+    </form>
+</div>
+
+<div data-bind="visible: isJoined()">
+    <h2><span data-bind="text:thisUser().userName"></span></h2>
+</div>
+
+@section scripts
+{
+<script>
+    var UserViewModel = function (userName) {
+        var self = this;
+        this.userName = ko.observable(userName);
+    }
+
+    var AppViewModel = function () {
+        var self = this;
+
+        self.newUserName = ko.observable('');
+        self.isJoined = ko.observable(false);
+        self.thisUser = ko.observable(new UserViewModel(''));
+
+        self.joinChannel = function () {
+            // send message to server to join game
+            self.userJoined(self.newUserName());
+        }
+
+        self.userJoined = function (userName) {
+            // temporary code to display user name once joined
+            var isMe = userName === self.newUserName();
+
+            if (isMe) {
+                self.thisUser().userName(userName);
+                self.isJoined(true);
+            }
+        }
+    }
+
+    var vm = new AppViewModel();
+    ko.applyBindings(vm);
+</script>
+}
