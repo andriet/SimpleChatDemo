@@ -59,7 +59,9 @@
     <Compile Include="Contracts\IChatEventsPusher.cs" />
     <Compile Include="Messages\JoinMessage.cs" />
     <Compile Include="Messages\NewUserMessage.cs" />
+    <Compile Include="Messages\RefreshUserStatusMessage.cs" />
     <Compile Include="Messages\TextMessage.cs" />
+    <Compile Include="Messages\UserStatusMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

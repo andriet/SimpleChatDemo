@@ -1,4 +1,5 @@
 ﻿using Akka.Actor;
+using SimpleChat.ActorModel.Messages;
 
 namespace SimpleChat.ActorModel.Actors
 {
@@ -9,6 +10,12 @@ namespace SimpleChat.ActorModel.Actors
         public UserActor(string name)
         {
             this.name = name;
+
+            Receive<RefreshUserStatusMessage>(
+                message =>
+                {
+                    Sender.Tell(new UserStatusMessage(this.name));
+                });
         }
     }
 }

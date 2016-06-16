@@ -21,7 +21,12 @@ namespace SimpleChat.ActorModel.Actors
             });
 
             // Outbound message
-            Receive<NewUserMessage>(message =>
+            //Receive<NewUserMessage>(message =>
+            //{
+            //    this.chatEventPusher.UserJoined(message.UserName);
+            //});
+
+            Receive<UserStatusMessage>(message =>
             {
                 this.chatEventPusher.UserJoined(message.UserName);
             });

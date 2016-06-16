@@ -33,6 +33,11 @@ namespace SimpleChat.ActorModel.Actors
                 IActorRef newUser = Context.ActorOf(Props.Create(() => new UserActor(message.UserName)), message.UserName);
                 users.Add(message.UserName, newUser);
                 Sender.Tell(new NewUserMessage(message.UserName));
+
+                foreach (var user in users.Values)
+                {
+                    user.Tell(new RefreshUserStatusMessage(), Sender);
+                }
             }
         }
     }
