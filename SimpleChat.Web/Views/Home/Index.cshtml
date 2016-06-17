@@ -16,7 +16,7 @@
     <div style="float: left; width: 100px;">
         <ul data-bind="foreach: otherUsers">
             <li data-bind="click: $parent.joinChannel" style="cursor: pointer;">
-                <span data-bind="text: textCount"></span> <span data-bind="text: userName"></span> 
+                 <span data-bind="text: userName"></span> <span data-bind="visible: showCount"><span data-bind="text: textCount"></span></span>
             </li>
         </ul>
     </div>
@@ -75,6 +75,9 @@
         var self = this;
         self.userName = ko.observable(userName);
         self.textCount = ko.observable(0);
+        self.showCount = ko.computed(function () {
+            return this.textCount() > 0;
+        }, self);
         self.messages = ko.observableArray().extend({ rateLimit: { timeout: 500, method: "notifyWhenChangesStop" } });
         self.addMessage = function (userName, text) {
             console.log("Adding new message by '" + text + "' by" + userName);
@@ -127,6 +130,7 @@
             })
 
             self.currentUser(current);
+            self.currentUser().textCount(0);
         }
 
         self.sendMessage = function () {
@@ -143,7 +147,10 @@
             })
             if (senderUser) {
                 senderUser.addMessage(sender, text);
-                senderUser.textCount(senderUser.textCount() + 1);
+
+                if(self.currentUser().userName() != sender) {
+                    senderUser.textCount(senderUser.textCount() + 1);
+                }
             }
         }
     }
