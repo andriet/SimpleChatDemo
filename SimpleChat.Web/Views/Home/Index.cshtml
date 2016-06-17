@@ -59,15 +59,15 @@
 
     var ChatChannelModel = function (firstUser, secondUser) {
         var self = this;
-        this.firstUser = firstUser;
-        this.secondUser = secondUser;
-        this.messages = ko.observableArray().extend({ rateLimit: { timeout: 500, method: "notifyWhenChangesStop" } });
+        self.firstUser = firstUser;
+        self.secondUser = secondUser;
+        self.messages = ko.observableArray().extend({ rateLimit: { timeout: 500, method: "notifyWhenChangesStop" } });
     }
 
     var UserViewModel = function (userName) {
         var self = this;
-        this.userName = ko.observable(userName);
-        this.textCount = ko.observable(0);
+        self.userName = ko.observable(userName);
+        self.textCount = ko.observable(0);
     }
 
     var AppViewModel = function () {
