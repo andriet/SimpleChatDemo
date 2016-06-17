@@ -9,6 +9,19 @@
 
 </head>
 <body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <div class="navbar-brand">Simple Chat Demo</div>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="\" target="_blank">New Window</a></li>
+                    <li><a href="#"><strong><span data-bind="text:thisUser().userName"></span></strong></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
     <div class="container body-content">
         @RenderBody()
     </div>
