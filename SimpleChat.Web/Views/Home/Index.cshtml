@@ -18,9 +18,7 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="panel panel-default">
-                    <!-- Default panel contents -->
                     <div class="panel-heading">People</div>
-                    <!-- List group -->
                     <ul class="list-group" data-bind="foreach: otherUsers">
                         <li class="list-group-item" data-bind="click: $parent.joinChannel, css: {active: isActive}" style="cursor: pointer;">
                             <span data-bind="text: userName"></span> <span data-bind="visible: showCount"><span class="badge" data-bind="text: textCount"></span></span>
@@ -112,12 +110,10 @@
 
         self.joinApp = function () {
             // send message to server to join game
-            //self.userJoined(self.newUserName());
             appHub.server.join(self.newUserName(), $.connection.hub.id);
         }
 
         self.userJoined = function (userName) {
-            // temporary code to display user name once joined
             var isMe = userName === self.newUserName();
 
             if (isMe) {
@@ -175,9 +171,5 @@
 
     var vm = new AppViewModel();
     ko.applyBindings(vm);
-
-    // testing
-    //vm.otherUsers.push(new UserViewModel('Bob'));
-    //vm.otherUsers.push(new UserViewModel('Jane'));
 </script>
 }
