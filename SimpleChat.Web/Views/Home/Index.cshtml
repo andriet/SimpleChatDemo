@@ -150,7 +150,7 @@
         self.sendMessage = function () {
             console.log('Send message: ' + self.newMessage());
             appHub.server.sendMessage(self.thisUser().userName(), self.currentUser().userName(), self.newMessage(), $.connection.hub.id);
-            
+            self.currentUser().addMessage(self.thisUser().userName(), self.newMessage());
             self.newMessage('');
         }
 
