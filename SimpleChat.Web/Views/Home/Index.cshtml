@@ -53,6 +53,7 @@
 
     appHub.client.notifyMessage = function(sender, recipient, text) {
         console.log("Text '" + text + "' from " + sender + " to " + recipient + " sent from server.")
+        vm.receiveMessage(sender, recipient, text);
     }
 
     $.connection.hub.disconnected(function () {
@@ -131,10 +132,19 @@
         self.sendMessage = function () {
             console.log('Send message: ' + self.newMessage());
             appHub.server.sendMessage(self.thisUser().userName(), self.currentUser().userName(), self.newMessage(), $.connection.hub.id);
-            //if (self.currentUser) {
-            //    self.currentUser().addMessage(self.thisUser().userName(), self.newMessage());
-            //}
+            
             self.newMessage('');
+        }
+
+        self.receiveMessage = function (sender, recipient, text) {
+
+            var senderUser = ko.utils.arrayFirst(self.otherUsers(), function (user) {
+                return sender === user.userName();
+            })
+            if (senderUser) {
+                senderUser.addMessage(sender, text);
+                senderUser.textCount(senderUser.textCount() + 1);
+            }
         }
     }
 
