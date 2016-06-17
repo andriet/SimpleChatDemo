@@ -22,8 +22,8 @@
                     <div class="panel-heading">People</div>
                     <!-- List group -->
                     <ul class="list-group" data-bind="foreach: otherUsers">
-                        <li class="list-group-item" data-bind="click: $parent.joinChannel" style="cursor: pointer;">
-                            <span data-bind="text: userName"></span> <span data-bind="visible: showCount"><span data-bind="text: textCount"></span></span>
+                        <li class="list-group-item" data-bind="click: $parent.joinChannel, css: {active: isActive}" style="cursor: pointer;">
+                            <span data-bind="text: userName"></span> <span data-bind="visible: showCount"><span class="badge" data-bind="text: textCount"></span></span>
                         </li>
                     </ul>
                 </div>
@@ -96,6 +96,7 @@
             console.log("Adding new message by '" + text + "' by" + userName);
             self.messages.push(new ChatMessageModel(userName, text));
         }
+        self.isActive = ko.observable(false);
     }
 
     var AppViewModel = function () {
@@ -144,6 +145,10 @@
 
             self.currentUser(current);
             self.currentUser().textCount(0);
+            ko.utils.arrayForEach(self.otherUsers(), function (item) {
+                item.isActive(false);
+            });
+            self.currentUser().isActive(true);
         }
 
         self.sendMessage = function () {
