@@ -17,6 +17,12 @@ namespace SimpleChat.UnitTest
         {
             this.output = output;
         }
+
+        public void NotifyMessage(string senderName, string recipientName, string text, string connectionID)
+        {
+            throw new NotImplementedException();
+        }
+
         public void UserJoined(string userName)
         {
             output.WriteLine($"{userName} has joined.");

@@ -6,17 +6,19 @@ using System.Threading.Tasks;
 
 namespace SimpleChat.ActorModel.Messages
 {
-    public class TextMessage
+    public class UpdateTextMessage
     {
         public string SenderName { get; private set; }
         public string RecipientName { get; private set; }
         public string Text { get; private set; }
+        public string ConnectionID { get; private set; }
 
-        public TextMessage(string senderName, string recipientName, string text)
+        public UpdateTextMessage(string senderName, string recipientName, string text, string connectionID)
         {
             this.SenderName = senderName;
             this.RecipientName = recipientName;
             this.Text = text;
+            this.ConnectionID = connectionID;
         }
     }
 }

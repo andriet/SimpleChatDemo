@@ -22,7 +22,7 @@ namespace SimpleChat.UnitTest
         [Fact]
         public void Join()
         {
-            this.fixture.Client.Tell(new JoinMessage("John"));
+            this.fixture.Client.Tell(new JoinMessage("John", ""));
             Thread.Sleep(2000);
         }
     }

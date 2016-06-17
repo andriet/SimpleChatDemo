@@ -51,8 +51,8 @@
         vm.userJoined(userName);
     }
 
-    appHub.client.sendMessage = function (text) {
-        console.log("Text '" + text + "' sent from server.");
+    appHub.client.notifyMessage = function(sender, recipient, text) {
+        console.log("Text '" + text + "' from " + sender + " to " + recipient + " sent from server.")
     }
 
     $.connection.hub.disconnected(function () {
@@ -95,7 +95,7 @@
         self.joinApp = function () {
             // send message to server to join game
             //self.userJoined(self.newUserName());
-            appHub.server.join(self.newUserName());
+            appHub.server.join(self.newUserName(), $.connection.hub.id);
         }
 
         self.userJoined = function (userName) {
@@ -130,9 +130,10 @@
 
         self.sendMessage = function () {
             console.log('Send message: ' + self.newMessage());
-            if (self.currentUser) {
-                self.currentUser().addMessage(self.thisUser().userName(), self.newMessage());
-            }
+            appHub.server.sendMessage(self.thisUser().userName(), self.currentUser().userName(), self.newMessage(), $.connection.hub.id);
+            //if (self.currentUser) {
+            //    self.currentUser().addMessage(self.thisUser().userName(), self.newMessage());
+            //}
             self.newMessage('');
         }
     }

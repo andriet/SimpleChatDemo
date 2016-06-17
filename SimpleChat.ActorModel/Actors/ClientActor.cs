@@ -20,15 +20,19 @@ namespace SimpleChat.ActorModel.Actors
                 this.chatChannelController.Tell(message);
             });
 
-            // Outbound message
-            //Receive<NewUserMessage>(message =>
-            //{
-            //    this.chatEventPusher.UserJoined(message.UserName);
-            //});
+            Receive<TextMessage>(message =>
+            {
+                this.chatChannelController.Tell(message);
+            });
 
             Receive<UserStatusMessage>(message =>
             {
                 this.chatEventPusher.UserJoined(message.UserName);
+            });
+
+            Receive<UpdateTextMessage>(message =>
+            {
+                this.chatEventPusher.NotifyMessage(message.SenderName, message.RecipientName, message.Text, message.ConnectionID);
             });
         }
     }

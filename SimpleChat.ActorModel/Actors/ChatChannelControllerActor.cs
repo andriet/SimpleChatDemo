@@ -17,6 +17,10 @@ namespace SimpleChat.ActorModel.Actors
             users = new Dictionary<string, IActorRef>();
             
             Receive<JoinMessage>(message => Join(message));
+
+            Receive<TextMessage>(message => HandleText(message));
+
+            
         }
 
         public List<string> GetUsers()
@@ -30,7 +34,7 @@ namespace SimpleChat.ActorModel.Actors
 
             if(userNeedsCreating)
             {
-                IActorRef newUser = Context.ActorOf(Props.Create(() => new UserActor(message.UserName)), message.UserName);
+                IActorRef newUser = Context.ActorOf(Props.Create(() => new UserActor(message.UserName, message.ConnectionID)), message.UserName);
                 users.Add(message.UserName, newUser);
                 Sender.Tell(new NewUserMessage(message.UserName));
 
@@ -39,6 +43,11 @@ namespace SimpleChat.ActorModel.Actors
                     user.Tell(new RefreshUserStatusMessage(), Sender);
                 }
             }
+        }
+
+        private void HandleText(TextMessage message)
+        {
+            users[message.RecipientName].Forward(message);
         }
     }
 }

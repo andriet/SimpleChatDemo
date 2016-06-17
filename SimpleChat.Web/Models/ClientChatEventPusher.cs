@@ -24,5 +24,10 @@ namespace SimpleChat.Web.Models
         {
             appHubContext.Clients.All.userJoined(userName);
         }
+
+        public void NotifyMessage(string senderName, string recipientName, string text, string connectionID)
+        {
+            appHubContext.Clients.Client(connectionID).notifyMessage(senderName, recipientName, text);
+        }
     }
 }

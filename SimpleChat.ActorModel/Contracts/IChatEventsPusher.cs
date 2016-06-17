@@ -9,5 +9,6 @@ namespace SimpleChat.ActorModel.Contracts
     public interface IChatEventsPusher
     {
         void UserJoined(string userName);
+        void NotifyMessage(string senderName, string recipientName, string text, string connectionID);
     }
 }

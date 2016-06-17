@@ -61,6 +61,7 @@
     <Compile Include="Messages\NewUserMessage.cs" />
     <Compile Include="Messages\RefreshUserStatusMessage.cs" />
     <Compile Include="Messages\TextMessage.cs" />
+    <Compile Include="Messages\UpdateTextMessage.cs" />
     <Compile Include="Messages\UserStatusMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

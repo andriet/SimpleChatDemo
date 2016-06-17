@@ -9,10 +9,12 @@ namespace SimpleChat.ActorModel.Messages
     public class JoinMessage
     {
         public string UserName { get; private set; }
+        public string ConnectionID { get; private set; }
 
-        public JoinMessage(string userName)
+        public JoinMessage(string userName, string connectionID)
         {
             UserName = userName;
+            ConnectionID = connectionID;
         }
     }
 }
