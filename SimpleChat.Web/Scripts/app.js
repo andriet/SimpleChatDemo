@@ -1,6 +1,6 @@
 ﻿var ChatMessageModel = function (name, text) {
     var self = this;
     self.name = name;
-    self.timestamp = Date.now();
+    self.timeStamp = moment().format('LLL');
     self.text = text;
 }

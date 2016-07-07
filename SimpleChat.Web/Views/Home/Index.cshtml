@@ -35,7 +35,7 @@
                     <div class="messages" data-bind="with: currentUser()" style="height: 600px; overflow-y: scroll;">
                         <ul class="list-unstyled" data-bind="foreach: messages">
                             <li style="border-bottom: solid 1px #bbbbbb; padding: 2px;">
-                                <span data-bind="text: name"></span><br /> 
+                                <strong><span data-bind="text: name"></span></strong> - <span style="font-style:italic;color:dimgray" data-bind="text: timeStamp"></span><br /> 
                                 <span data-bind="text: text"></span>
                             </li>
                         </ul>
